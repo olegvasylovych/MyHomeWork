@@ -1,28 +1,28 @@
 package com.company;
 
 public class MergeSort {
-    // Обєднуємо два підмасиви arr[].
-    // перший підмасив є arr[l..m]
-    // другий підмасив є arr[m+1..r]
+    // combine two subarrays arr[].
+    // first subarrays is arr[l..m]
+    // second subarrays is arr[m+1..r]
     void merge(int arr[], int l, int m, int r) {
-        // знаходимо розміри двох підмасивів для об'єднання
+        // find the demensions of the two subarrays to merge
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        /* Створюємо тимчасові підмасиви */
+        /* create temporary subarrays */
         int L[] = new int[n1];
         int R[] = new int[n2];
 
-        /*Копіюємо відсортовані масиви в тимчасові*/
+        /*copythe sorted arrays in temporary*/
         for (int i = 0; i < n1; ++i)
             L[i] = arr[l + i];
         for (int j = 0; j < n2; ++j)
             R[j] = arr[m + 1 + j];
 
-        // Ітератори містять поточний індекс тимчасового підмасива
+        // Iterators contain the current index of the temporary subarray 
         int i = 0, j = 0;
 
-        // Ітератор який містить поточний індекс відсортованого масиву
+        // An iterator that contains the current index of the sorted array 
         int k = l;
         while (i < n1 && j < n2) {
             if (L[i] <= R[j]) {
@@ -35,14 +35,14 @@ public class MergeSort {
             k++;
         }
 
-        /* Копіюємо елементи, що залишилися з лівого підмасива */
+        /* Copy the remaining elements from the left array */
         while (i < n1) {
             arr[k] = L[i];
             i++;
             k++;
         }
 
-        /* Копіюємо елементи, що залишилися з правого підмасива*/
+        /* Copy the remaining elements from the right array*/
         while (j < n2) {
             arr[k] = R[j];
             j++;
@@ -50,23 +50,23 @@ public class MergeSort {
         }
     }
 
-    // Основна функція що сортує arr[l..r] використовуючи
+    // The main function that sorts arr [l..r] using 
     // merge()
     void sort(int arr[], int l, int r) {
         if (l < r) {
-            // шукаємо середину
+            // looking for the middle
             int m = l + (r - l) / 2;
 
-            // Сортуємо першу і другу половинки
+            // We sort the first and second halves 
             sort(arr, l, m);
             sort(arr, m + 1, r);
 
-            // об'єднуємо відсортовані половинки
+            // combine sorted halves 
             merge(arr, l, m, r);
         }
     }
 
-    /* Функція для друку масива розміром n */
+    /* Function for printing an array of size n */
     static void printArray(int arr[]) {
         int n = arr.length;
         for (int i = 0; i < n; ++i)
